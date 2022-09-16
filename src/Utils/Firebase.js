@@ -7,14 +7,21 @@ import { getStorage } from "firebase/storage";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCkchpoVFji7bvvtgNVn6MtyqgUqc8C_xg",
-  authDomain: "nacospolybida.firebaseapp.com",
-  projectId: "nacospolybida",
-  storageBucket: "nacospolybida.appspot.com",
-  messagingSenderId: "712129161689",
-  appId: "1:712129161689:web:e2a994eb9dcb2cf3f9d1c8",
-  measurementId: "G-6M66CXDC7L"
+
+  apiKey: "AIzaSyBOj1baSXORuThDICnh01rNx8TPorxuHUs",
+
+  authDomain: "gripe-forum.firebaseapp.com",
+
+  projectId: "gripe-forum",
+
+  storageBucket: "gripe-forum.appspot.com",
+
+  messagingSenderId: "118106829404",
+
+  appId: "1:118106829404:web:031ec4e4a2ecc79a5fac99"
+
 };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

@@ -2,58 +2,38 @@ import React from 'react'
 import { useGlobalContext } from '../../Functions/Context'
 
 const Sidebar = () => {
-    const { pageState, pageStateF } = useGlobalContext()
+    const { pageState, pageStateF, navigate } = useGlobalContext()
     return (
         <div className='adminSidebar normalmediaQuery'>
 
 
             <div className="menus">
                 <div onClick={() => {
+                    navigate('/admin')
                     pageStateF('default')
+
                 }} className={pageState === 'default' ? 'activemenu eachmenu' : 'eachmenu'} >
                     <img src="svg/dash.svg" alt="" />
                     <p>Dashboard</p>
                 </div>
                 <div onClick={() => {
-                    pageStateF('blog')
-                }} className={pageState === 'blog' ? 'activemenu eachmenu' : 'eachmenu'} >
+                    navigate('/admin')
+                    pageStateF('Inbox')
+                }} className={pageState === 'Inbox' ? 'activemenu eachmenu' : 'eachmenu'} >
                     <img src="svg/blog.svg" alt="" />
-                    <p>Blog</p>
+                    <p>Inbox</p>
                 </div>
                 <div onClick={() => {
-                    pageStateF('msg')
-                }} className={pageState === 'msg' ? 'activemenu eachmenu' : 'eachmenu'} >
-                    <img src="svg/msg.svg" alt="" />
-                    <p>Message</p>
+                    navigate('/admin')
+                    pageStateF('Outbox')
+                }} className={pageState === 'Outbox' ? 'activemenu eachmenu' : 'eachmenu'} >
+                    <img src="svg/bar-chart-box-line.svg" alt="" />
+                    <p>Outbox</p>
                 </div>
-                <div onClick={() => {
-                    pageStateF('course')
-                }} className={pageState === 'course' ? 'activemenu eachmenu' : 'eachmenu'} >
-                    <img src="svg/buld.svg" alt="" />
-                    <p>Courses</p>
-                </div>
-                <div onClick={() => {
-                    pageStateF('staff')
-                }} className={pageState === 'staff' ? 'activemenu eachmenu' : 'eachmenu'} >
-                    <img src="svg/people.svg" alt="" />
-                    <p>Staffs</p>
-                </div>
-                <div onClick={() => {
-                    pageStateF('settings')
-                }} className={pageState === 'settings' ? 'activemenu eachmenu' : 'eachmenu'} >
-                    <img src="svg/settings.svg" alt="" />
-                    <p>Settings</p>
-                </div>
+
             </div>
 
-            <div className="foot">
-                <div className="sidebarImg">
-                    <img src="svg/w (1).svg" alt="" />
-                </div>
-                <button onClick={() => {
-                    pageStateF('student')
-                }}>Register Student</button>
-            </div>
+
 
 
 

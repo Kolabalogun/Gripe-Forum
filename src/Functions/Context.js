@@ -1,7 +1,8 @@
-import { signOut } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { auth } from "../Utils/Firebase";
+import { auth, db, provider } from "../Utils/Firebase";
 
 
 const AppContext = React.createContext();
@@ -17,8 +18,10 @@ const AppProvider = ({ children }) => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         setuser(authUser);
+
       } else {
         setuser(null);
+        navigate('/auth')
       }
     });
   }, []);
@@ -71,7 +74,33 @@ const AppProvider = ({ children }) => {
 
 
 
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
+      localStorage.setItem("isLoggedIn", true);
 
+
+
+      // Add user to firestore 
+      try {
+        addDoc(collection(db, "signedInUsers"), {
+          email: result.user.email,
+          username: result.user.displayName,
+          timestamp: serverTimestamp(),
+          photo: result.user.photoURL,
+
+
+
+        });
+
+
+      } catch (error) {
+        console.log(error);
+        notificationF(error);
+      }
+
+      // window.location.reload();
+    });
+  };
 
 
 
@@ -93,7 +122,8 @@ const AppProvider = ({ children }) => {
         id,
         notification,
         notificationF,
-        pageState, pageStateF
+        pageState, pageStateF,
+        signInWithGoogle
 
       }}
     >
