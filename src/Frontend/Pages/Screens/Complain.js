@@ -2,8 +2,10 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Loader from '../../../Backend/Components/Loader';
 import { useGlobalContext } from '../../../Functions/Context';
 import { db } from '../../../Utils/Firebase';
+import Footer from '../../Components/Footer';
 
 
 
@@ -11,16 +13,9 @@ const Complain = () => {
 
 
     const { user,
-
-        handleLogout,
-
-
-        loader,
         setloader,
-
-
         notification,
-        notificationF } = useGlobalContext()
+        notificationF, loader } = useGlobalContext()
 
 
     const [dateId, setdateId] = useState("");
@@ -34,7 +29,12 @@ const Complain = () => {
     const [form, setform] = useState({
         title: "",
         description: "",
-        reply: []
+        reply: {
+
+            replyTxt: "",
+
+            dateId: '',
+        }
     });
 
 
@@ -44,7 +44,7 @@ const Complain = () => {
 
 
 
-    const { title, description, reply } = form;
+    const { title, description } = form;
 
 
 
@@ -80,37 +80,55 @@ const Complain = () => {
     };
 
     return (
-        <div className='dashboard'>  <div className='topauthnav'>
-            <h1>Complain</h1>
+        <div className='dashboard'>
+            {loader ? <Loader />
+                :
 
-        </div>
+                <div className='mainbody'>
+                    <div style={{ flex: 2 }}>
+                        <div className='topauthnav'>
+                            <h1>Complain</h1>
 
-            <div className='notificationBox'>
-                <h3>Please Submit your Report</h3>
+                        </div>
 
-                <div className='form'>
-                    <input type="text"
-                        onChange={handleChange}
-                        value={title}
-                        required
-                        minLength={4}
+                        <div className='notificationBox'>
+                            <h3>Please Submit your Report</h3>
 
-                        name="title" placeholder='Title of Complain' />
-                    <textarea type="text"
-                        onChange={handleChange}
-                        value={description}
-                        required
-                        rows={9}
-                        minLength={4}
+                            <div className='form'>
+                                <input type="text"
+                                    onChange={handleChange}
+                                    value={title}
+                                    required
+                                    minLength={3}
 
-                        name="description" placeholder='This is Where you enter all your complains' />
+                                    name="title" placeholder='Title of Complain' />
+                                <textarea type="text"
+                                    onChange={handleChange}
+                                    value={description}
+                                    required
+                                    rows={11}
+                                    minLength={4}
 
-                    <p>{notification}</p>
-                    <button onClick={handleSubmit}>Submit Complain</button>
+                                    name="description" placeholder='This is Where you enter all your complains' />
+
+                                <p>{notification}</p>
+                                <button onClick={handleSubmit}>Submit Complain</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <Footer />
                 </div>
 
+            }
 
-            </div></div>
+
+
+
+
+
+        </div>
     )
 }
 

@@ -8,21 +8,19 @@ import { useGlobalContext } from "../../Functions/Context";
 import { db } from "../../Utils/Firebase";
 import Loader from "../Components/Loader";
 
-const Details = ({ offreplySection }) => {
+const ResponseDetails = ({ offreplySection }) => {
 
 
-    const [complain, complainF] = useState({
-        title: '',
-        description: '',
-        reply: {
+    const [complain, complainF] = useState(
+        {
+            title: '',
+            reply: {
 
-            replyTxt: "",
+                replyTxt: "",
 
-            dateId: '',
+                dateId: '',
+            }
         }
-
-    }
-
     );
 
 
@@ -78,18 +76,16 @@ const Details = ({ offreplySection }) => {
 
         if (replyObj === "") {
         } else if (replyTxt) {
-            setloader(true)
             try {
                 await updateDoc(doc(db, "complains", id), {
                     ...complain,
                     reply: replyObj,
                 });
                 toast.success("Reply uploaded");
-                setloader(false)
             } catch (err) {
                 console.log(err);
             }
-
+            window.location.reload();
         } else {
             return toast.error("All fields must be filled");
         }
@@ -109,55 +105,23 @@ const Details = ({ offreplySection }) => {
                 <>
                     <div style={{ minHeight: '70vh' }}>
 
+
                         <div className="report" >
                             <h5>{complain.title}</h5>
 
-                            <p>{complain.description}</p>
+                            <p>{complain.reply.replyTxt}</p>
 
                         </div>
-                        {!offreplySection &&
-                            <div className="commentForm">
-                                <h4>Leave a Response to this Complaint</h4>
-
-
-
-                                <form>
-                                    <div className="commentFlex">
-                                        {/* <input type="text"
-                                    onChange={handleReplyChange}
-                                    value={title}
-                                    required
-                                    minLength={4}
-
-                                    
-
-
-                                    name="title" placeholder='Title of Response' /> */}
-
-                                    </div>
-
-                                    <textarea type="text"
-                                        onChange={handleReplyChange}
-                                        value={replyTxt}
-                                        required
-                                        rows={9}
-                                        minLength={4}
-
-                                        name="replyTxt" placeholder='This is where you enter your response' />
-
-                                    <button onClick={wIP}>Submit Response</button>
-                                </form>
-
-                            </div>}
 
                     </div>
-                    <Footer />
+                    {/* <Footer /> */}
+
                 </>
             )}
         </>
     );
 };
 
-export default Details;
+export default ResponseDetails;
 
 

@@ -1,8 +1,10 @@
 import { collection, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import Footer from '../../Frontend/Components/Footer';
 import { useGlobalContext } from '../../Functions/Context';
 import { db } from '../../Utils/Firebase';
+import Loader from '../Components/Loader';
 import Details from './Details';
 
 const Inbox = () => {
@@ -23,7 +25,7 @@ const Inbox = () => {
                     list.push({ id: doc.id, ...doc.data() });
                 });
                 complainsF(list);
-
+                setloader(false);
             },
             (error) => {
                 console.log(error);
@@ -60,49 +62,79 @@ const Inbox = () => {
         <div className='dashboard'>
 
 
-            <div className='topauthnav'>
-                <h1>Inbox</h1>
-
-            </div>
-
             {
-                DetailsPage ? <Details /> :
+                loader ? <Loader /> :
 
                     <>
+                        <div style={{ minHeight: '70vh' }}>
 
-
-                        <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
-                            {/* <h3>Recent Complains</h3> */}
-
-
-                            <div className='reports'>
-
-
-                                {complains.map((report, index) =>
-
-                                    <div key={index} className="report" >
-                                        <h5>{report.title}</h5>
-
-                                        <p>{`${report.description.substring(0, 100)}...`}</p>
-                                        <Link to={`/admin/detail/${report.id}`}>
-                                            <button className='btn'>See Complain</button>
-                                        </Link>
-
-                                    </div>
-
-
-                                )}
-
-
-
+                            <div className='topauthnav'>
+                                <h1>Inbox</h1>
 
                             </div>
 
+                            {
+                                DetailsPage ? <Details /> :
 
+                                    <>
+
+
+                                        <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
+                                            {/* <h3>Recent Complains</h3> */}
+
+
+                                            <div className='reports'>
+
+                                                {
+                                                    complains.length > 0 ?
+
+                                                        <>
+
+                                                            {complains.map((report, index) =>
+
+
+
+                                                                <div key={index} className="report" >
+                                                                    <h5>{report.title}</h5>
+
+                                                                    <p>{`${report.description.substring(0, 100)}...`}</p>
+                                                                    <Link to={`/admin/detail/${report.id}`}>
+                                                                        <button className='btn'>See Complain</button>
+                                                                    </Link>
+
+                                                                </div>
+
+
+                                                            )}
+                                                        </>
+                                                        :
+                                                        <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
+                                                            <img src='img/aa.png' alt='' />
+
+                                                            <p style={{ marginTop: -40 }}>Your Inbox is empty</p>
+                                                        </div>
+                                                }
+
+
+
+
+
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </>
+                            }
 
                         </div>
+                        <Footer />
                     </>
             }
+
+
+
 
 
 

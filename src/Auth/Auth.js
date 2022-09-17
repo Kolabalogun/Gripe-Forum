@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../Backend/Components/Navbar'
 import { useGlobalContext } from '../Functions/Context'
+import { auth } from '../Utils/Firebase'
+
 
 const Auth = () => {
 
-    const { signInWithGoogle } = useGlobalContext()
+    const { signInWithGoogle, navigate, user, adminuser } = useGlobalContext()
+
+
+    useEffect(() => {
+        if (user && adminuser !== 'null') {
+            navigate('/admin')
+        } else if (user) {
+            navigate('/home')
+        }
+    }, []);
+
+
+
     return (
         <>
 

@@ -4,6 +4,8 @@ import { useGlobalContext } from '../../Functions/Context'
 import Sidebar from '../Components/Sidebar'
 import Complain from './Screens/Complain'
 import Dashboard from './Screens/Dashboard'
+import Inbox from './Screens/Inbox'
+import Trash from './Screens/Trash'
 
 
 const Home = () => {
@@ -18,10 +20,11 @@ const Home = () => {
 
                 {pageState === 'complain' ? <Complain /> :
 
+                    pageState === 'Inbox' ? <Inbox /> :
+                        pageState === 'Trash' ? <Trash /> :
 
 
-
-                    <Dashboard />}
+                            <Dashboard />}
 
             </div>
 

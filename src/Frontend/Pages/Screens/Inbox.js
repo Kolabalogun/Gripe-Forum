@@ -1,28 +1,22 @@
-import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../../../Backend/Components/Loader';
+
 import { useGlobalContext } from '../../../Functions/Context';
 import { db } from '../../../Utils/Firebase';
 import Footer from '../../Components/Footer';
 import ReplyDetails from './ReplyDetails';
 
-const Dashboard = () => {
-    const { loader, setloader, user } = useGlobalContext()
+
+
+const Inbox = () => {
+
+    const { setloader, loader, user } = useGlobalContext()
 
     const userId = user?.uid
 
-    console.log(userId);
-
-
-    const [complains, complainsF] = useState([
-        {
-            reply: {
-                replyTxt: "",
-                dateId: '',
-            }
-        }
-    ]);
+    const [complains, complainsF] = useState([]);
 
     useEffect(() => {
         setloader(true);
@@ -51,6 +45,8 @@ const Dashboard = () => {
 
     const { id } = useParams()
 
+
+
     useEffect(() => {
 
 
@@ -64,31 +60,33 @@ const Dashboard = () => {
 
 
 
-    const itemsToRenderCourse = complains.slice(0, 4);
 
 
 
     return (
-
-
         <div className='dashboard'>
 
-            <>
-                {loader ? <Loader /> :
 
-                    <>
+            {loader ? <Loader /> :
 
-                        {DetailsPage ? <ReplyDetails /> :
-                            <div>
-                                <div style={{ flex: 2, minHeight: '70vh' }}>
-                                    <div className='topauthnav'>
-                                        <h1>Dashboard</h1>
 
-                                    </div>
+                <>
+                    <div style={{ minHeight: '70vh' }}>
+
+                        <div className='topauthnav'>
+                            <h1>Inbox</h1>
+
+
+                        </div>
+
+                        {
+                            DetailsPage ? <ReplyDetails /> :
+
+                                <>
+
 
                                     <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
-                                        <h3>            {
-                                            complains.length > 0 ? 'Recent Replies' : 'Your Dashboard is empty'}</h3>
+                                        <h3>{complains.length > 0 && 'These are list of responses'}</h3>
 
 
                                         <div className='reports'>
@@ -96,46 +94,42 @@ const Dashboard = () => {
                                             {
                                                 complains.length > 0 ?
                                                     <>
-                                                        {itemsToRenderCourse.map((report, index) => {
-                                                            console.log(report);
+                                                        {complains.map((report, index) => {
                                                             if (report.reply.replyTxt !== '' && userId === report.userId) {
-
                                                                 return (
                                                                     <div key={index} className="report" >
                                                                         <h5>Response From Admin</h5>
 
                                                                         <p>{`${report.reply.replyTxt.substring(0, 100)}...`}</p>
                                                                         <Link to={`/detail/${report.id}`}>
-                                                                            <button className='btn'>See Reply</button>
+                                                                            <button className='btn'>See Details</button>
                                                                         </Link>
 
                                                                     </div>
                                                                 );
                                                             }
 
-                                                            // else if (report.reply.replyTxt.length === 0 && userId !== report.userId) {
+                                                            // else if (report.reply.replyTxt === '' && userId === report.userId) {
                                                             //     return (
                                                             //         <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                            //             <img src='img/dash.png' alt='' />
+                                                            //             <img src='img/aa.png' alt='' />
 
-                                                            //             <p style={{ marginTop: -40 }}>Your Dashboard is empty</p>
+                                                            //             <p style={{ marginTop: -40 }}>Your Inbox is empty</p>
                                                             //         </div>
                                                             //     )
                                                             // }
 
                                                         }
 
-                                                        )}</> :
-
-
+                                                        )}
+                                                    </>
+                                                    :
                                                     <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                        <img src='img/dash.png' alt='' />
+                                                        <img src='img/aa.png' alt='' />
 
-                                                        <p style={{ marginTop: -40 }}>Your dashboard is empty</p>
+                                                        <p style={{ marginTop: -40 }}>Your Inbox is empty</p>
                                                     </div>
-
                                             }
-
 
 
 
@@ -147,25 +141,12 @@ const Dashboard = () => {
 
 
                                     </div>
-                                </div>
-                                <Footer />
-
-                            </div>
+                                </>
                         }
-
-
-                    </>
-                }
-            </>
-
-
-
-
-
-
-
-
-
+                    </div>
+                    <Footer />
+                </>
+            }
 
 
 
@@ -176,4 +157,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard                
+export default Inbox

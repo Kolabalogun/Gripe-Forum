@@ -1,7 +1,8 @@
 import { signInWithPopup, signOut } from "firebase/auth";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, serverTimestamp } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { auth, db, provider } from "../Utils/Firebase";
 
 
@@ -12,7 +13,8 @@ const AppProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // for user login confirmation
-  const [user, setuser] = useState(null);
+  const [user, setuser] = useState(localStorage.getItem("isLoggedIn"));
+  const [adminuser, setadminuser] = useState(localStorage.getItem("isAdminLoggedIn"));
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -21,19 +23,48 @@ const AppProvider = ({ children }) => {
 
       } else {
         setuser(null);
-        navigate('/auth')
+        navigate('/')
       }
     });
   }, []);
 
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider).then((result) => {
+
+      localStorage.setItem("isLoggedIn", true);
+      navigate('/home')
+
+      // Add user to firestore 
+      try {
+        addDoc(collection(db, "signedInUsers"), {
+          email: result.user.email,
+          username: result.user.displayName,
+          timestamp: serverTimestamp(),
+          photo: result.user.photoURL,
+        });
+        toast(" You've successfully Signed In")
+        navigate('/home')
+      } catch (error) {
+        console.log(error);
+        notificationF(error);
+      }
+    });
+  };
+
   //   logging out user
   const handleLogout = () => {
     signOut(auth).then(() => {
-      setuser(null);
-      navigate("/");
-      signUserOut();
 
-      // return toast.error("You've successfully Log Out");
+
+      setuser(null);
+      localStorage.setItem("isLoggedIn", null);
+      localStorage.setItem("isAdminLoggedIn", null);
+      navigate("/");
+      window.location.reload()
+
+
+
+      return toast.error("You've successfully Log Out");
     });
   };
 
@@ -61,12 +92,6 @@ const AppProvider = ({ children }) => {
 
 
 
-  const signUserOut = () => {
-    signOut(auth).then(() => {
-      localStorage.clear();
-
-    });
-  };
 
   // Admin Page STate 
 
@@ -74,35 +99,29 @@ const AppProvider = ({ children }) => {
 
 
 
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider).then((result) => {
-      localStorage.setItem("isLoggedIn", true);
+
+
+  // TYpe of User 
 
 
 
-      // Add user to firestore 
+
+
+
+
+  // to delete blogs
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this Complain?")) {
       try {
-        addDoc(collection(db, "signedInUsers"), {
-          email: result.user.email,
-          username: result.user.displayName,
-          timestamp: serverTimestamp(),
-          photo: result.user.photoURL,
-
-
-
-        });
-
-
+        setloader(true);
+        await deleteDoc(doc(db, "complains", id));
+        setloader(false);
+        toast.error("Complain Deleted");
       } catch (error) {
         console.log(error);
-        notificationF(error);
       }
-
-      // window.location.reload();
-    });
+    }
   };
-
-
 
 
 
@@ -113,6 +132,7 @@ const AppProvider = ({ children }) => {
       value={{
         user,
         setuser,
+        adminuser, setadminuser,
         handleLogout,
 
         navigate,
@@ -123,7 +143,9 @@ const AppProvider = ({ children }) => {
         notification,
         notificationF,
         pageState, pageStateF,
-        signInWithGoogle
+        signInWithGoogle,
+
+        handleDelete
 
       }}
     >

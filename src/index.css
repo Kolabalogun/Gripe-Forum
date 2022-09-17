@@ -6,6 +6,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* overflow: hidden; */
 }
 
 code {
@@ -23,13 +25,35 @@ header {
   box-shadow: 1px 1px 20px 3px aliceblue;
   display: flex;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 30px;
   justify-content: space-between;
 }
 
 .logo > h1 {
   font-size: 25px;
   color: #1f98d1;
+}
+
+.eng {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.eng > img {
+  height: 15px;
+}
+.eng > p {
+  font-size: 15px;
+  margin-left: 10px;
+  color: red;
+}
+
+.userNav {
+  display: flex;
+  align-items: center;
+}
+.userNav > p {
+  padding-right: 10px;
 }
 
 .home {
@@ -46,7 +70,7 @@ header {
 .adminSidebar {
   width: 300px !important;
   /* height: 100vh; */
-
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   padding: 10px 20px;
@@ -87,7 +111,7 @@ header {
   display: flex;
   flex-direction: column;
   padding: 10px 30px;
-  /* overflow-y: scroll; */
+  /* overflow: scroll; */
   background: aliceblue;
   margin: 0;
 }
@@ -106,7 +130,7 @@ header {
   border-radius: 10px;
   margin: 0;
   background-color: white;
-  padding: 0px 15px 10px;
+  padding: 10px 15px 10px;
 }
 
 .notificationBox > h3 {
@@ -129,20 +153,20 @@ header {
   outline: none;
 
   font-family: inherit;
-  border: 1px solid black;
+  border: 1px solid #aaa;
   margin-bottom: 10px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
 .notificationBox > .form > textarea {
-  min-height: 300px;
+  /* min-height: 300px; */
   padding: 5px;
   resize: none;
   outline: none;
 
   font-family: inherit;
-  border: 1px solid black;
+  border: 1px solid #aaa;
 }
 .notificationBox > .form > button {
   border-radius: 5px;
@@ -220,6 +244,7 @@ header {
 .report > p {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-size: 15px;
 }
 
 .btn {
@@ -297,7 +322,7 @@ header {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   background-color: aliceblue;
   /* text-align: center; */
 }
@@ -344,16 +369,17 @@ header {
 
 .commentForm {
   margin-top: 30px;
-  padding: 30px;
+  padding: 10px;
   box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
   z-index: 99;
 }
 
 .commentForm > h4 {
-  font-weight: bold;
-  font-size: 22px;
+  font-weight: 400;
+  font-size: 20px;
   padding: 5px 0;
   z-index: 99;
+  margin: 0;
 }
 .commentForm > p {
   font-size: 14px;
@@ -378,7 +404,7 @@ header {
 .commentFlex > input {
   width: 100%;
   padding: 0 10px;
-  margin: 10px 0px;
+  margin: 0px 0px;
   z-index: 99;
 
   color: rgb(105, 100, 100);
@@ -408,10 +434,10 @@ header {
 }
 .commentForm > form > textarea {
   z-index: 99;
-  width: 100%;
+  width: 95%;
   font-family: Montserrat, sans-serif;
 
-  color: rgb(105, 100, 100);
+  color: black;
   outline: none;
   resize: none;
 
@@ -420,7 +446,7 @@ header {
   border-radius: 4px;
   padding: 12px 10px;
   font-size: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 0px;
 }
 .commentForm > form > button {
   margin: 10px 0px;
@@ -440,4 +466,132 @@ header {
   display: flex;
   align-self: center;
   z-index: 99;
+}
+
+/* Authentication  */
+
+.authBody {
+  display: flex;
+  justify-content: center;
+  /* min-height: 60vh; */
+
+  padding: 5px 0;
+}
+
+.authform {
+  max-width: 600px;
+  width: 100%;
+
+  margin: 30px 0;
+  padding: 30px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 10%);
+}
+
+.authTitle {
+  margin: 10px 0px;
+  font-weight: bold;
+}
+.authTitle > h3 {
+  font-weight: bold;
+  font-size: 22px;
+  padding: 5px 0;
+}
+.authform > form {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.authform > form > input {
+  width: 100%;
+  padding: 0 10px;
+  margin: 10px 0px;
+
+  color: rgb(105, 100, 100);
+  outline: none;
+
+  border: 1px solid rgb(216, 214, 214);
+
+  border-radius: 4px;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-family: Montserrat, sans-serif;
+}
+.authform > form > select {
+  width: 100%;
+  padding: 15px 10px;
+  margin: 10px 0px;
+  font-size: 17px;
+  color: rgb(105, 100, 100);
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid rgb(216, 214, 214);
+  /* border-top: 2px solid rgb(238, 24, 126); */
+  border-bottom: 4px solid rgb(240, 98, 48);
+  /* border-left: 2px solid rgb(115, 193, 162);
+  border-right: 2px solid rgb(47, 171, 205); */
+}
+.authform > form > textarea {
+  width: 100%;
+  font-family: Montserrat, sans-serif;
+
+  color: rgb(105, 100, 100);
+  outline: none;
+  resize: none;
+
+  border: 1px solid rgb(216, 214, 214);
+  margin: 10px 0;
+  border-radius: 4px;
+  padding: 12px 10px;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+.authform > form > button {
+  width: 40%;
+
+  margin: 10px 0px;
+  font-size: 16px;
+  color: white;
+
+  outline: none;
+
+  cursor: pointer;
+
+  border-radius: 4px;
+  padding: 10px 20px;
+  border: 0;
+  background-color: rgb(27, 47, 69);
+}
+.dhac {
+  /* text-align: center; */
+}
+.dhac > h6 {
+  font-size: 16px;
+}
+.dhac > h6 > span {
+  font-size: 16px;
+  color: rgb(47, 171, 205);
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+
+  flex-direction: column;
+  margin-top: 50px;
+  padding: 20px 0;
+  font-size: 14px;
+  transition: all 0.3s;
+  border-top: 1px solid #cddfff;
+}
+
+.copyright {
+  text-align: center;
+  color: #012970;
+}
+
+.cre {
+  padding-top: 5px;
+  text-align: center;
+  font-size: 13px;
+  color: #012970;
 }

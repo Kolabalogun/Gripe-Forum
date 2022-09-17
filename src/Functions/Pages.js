@@ -8,13 +8,16 @@ import Home from "../Frontend/Pages/Home";
 import AdminHome from "../Backend/AdminHome";
 import Auth from "../Auth/Auth";
 import { useGlobalContext } from "./Context";
+import AdminAuth from "../Auth/AdminAuth";
 
 
 
 
 const Pages = () => {
 
-  const { user } = useGlobalContext()
+  const { user, adminuser } = useGlobalContext()
+
+
 
   const location = useLocation();
   return (
@@ -22,21 +25,97 @@ const Pages = () => {
       <Routes key={location.pathname} location={location}>
 
 
+        <Route path="/" element={<Auth />} />
+        <Route path="/adminauth" element={<AdminAuth />} />
 
 
-
-        <Route path="*" element={<Home />} />
 
         {
-          !user ? <Route path="/auth" element={<Auth />} /> :
+          user ?
             <>
-              <Route path="/" element={<Home />} />
-              <Route path="/admin" element={<AdminHome />} />
+              <>
+                <Route path="/home" element={<Home />} />
+                <Route path="*" element={<Home />} />
+                <Route path="/detail/:id" element={<Home />} />
+              </>
 
-              <Route path="/admin/detail/:id" element={<AdminHome />} />
+              <>
+                {
+                  adminuser !== 'null' ? <>
+                    <Route path="/admin" element={<AdminHome />} />
+
+                    <Route path="/admin/detail/:id" element={<AdminHome />} />
+
+
+                  </> :
+                    <Route path="/adminauth" element={<AdminAuth />} />
+
+                }
+
+              </>
 
             </>
+
+            :
+
+            <Route path="/" element={<Auth />} />
+
         }
+
+        {/* 
+        <Route path="/adminauth" element={<AdminAuth />} />
+        <Route path="/admin" element={<AdminHome />} />
+
+        {
+          user && <>
+            <Route path="/home" element={<Home />} />
+            <Route path="/detail/:id" element={<Home />} />
+          </>
+        }
+
+
+        {
+          adminuser !== 'null' && user && <>
+            <Route path="/admin" element={<AdminHome />} />
+
+            <Route path="/admin/detail/:id" element={<AdminHome />} />
+
+
+          </>
+        } */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -46,3 +125,5 @@ const Pages = () => {
 };
 
 export default Pages;
+
+<Route path="*" element={<Home />} />

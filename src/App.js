@@ -1,6 +1,6 @@
 
 import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
+
 
 import "react-toastify/dist/ReactToastify.css";
 import Pages from "./Functions/Pages";
