@@ -12,7 +12,7 @@ const Dashboard = () => {
 
     const userId = user?.uid
 
-    console.log(userId);
+    // console.log(userId);
 
 
     const [complains, complainsF] = useState([
@@ -97,7 +97,7 @@ const Dashboard = () => {
                                                 complains.length > 0 ?
                                                     <>
                                                         {itemsToRenderCourse.map((report, index) => {
-                                                            console.log(report);
+                                                            // console.log(report);
                                                             if (report.reply.replyTxt !== '' && userId === report.userId) {
 
                                                                 return (

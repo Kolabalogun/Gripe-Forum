@@ -122,7 +122,16 @@ header {
   align-items: center;
   width: 100%;
 }
+.box {
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
+}
 .topauthnav h1 {
+  margin: 0;
+  padding: 0px 0 5px;
   font-weight: 200;
 }
 
@@ -133,18 +142,26 @@ header {
   padding: 10px 15px 10px;
 }
 
-.notificationBox > h3 {
-  font-size: 14px;
+.insidenav {
+  font-size: 13px;
   font-family: "Nunito", sans-serif;
-  color: #899bbd;
+  color: #899bbddc;
   font-weight: 600;
+  margin: 0 0 30px;
+}
 
-  color: #51678f;
+.complainheader {
+  padding: 5px 0 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #012970;
+  font-family: "Poppins", sans-serif;
 }
 
 .notificationBox > .form {
   display: flex;
   flex-direction: column;
+  padding: 0 0 10px;
 }
 
 .notificationBox > .form > input {
@@ -254,7 +271,7 @@ header {
 
 .authbody {
   background-color: aliceblue;
-  height: 100vh;
+  height: 80vh;
   margin: 0;
   display: flex;
   align-items: center;
@@ -577,7 +594,7 @@ header {
   display: flex;
 
   flex-direction: column;
-  margin-top: 50px;
+  /* margin-top: 50px; */
   padding: 20px 0;
   font-size: 14px;
   transition: all 0.3s;

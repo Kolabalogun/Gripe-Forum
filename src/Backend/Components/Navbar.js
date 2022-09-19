@@ -15,7 +15,7 @@ const Navbar = () => {
 
       <div className='userNav'>
         <div className='adminNotify normal' style={{ paddingRight: 30 }}>
-          {adminuser === 'null' ? '' : adminuser !== 'null' ? 'Admin' : ''}
+          {adminuser === null || adminuser === 'null' ? '' : adminuser !== null ? 'Admin' : ''}
         </div>
 
         {user ?

@@ -31,6 +31,13 @@ const Sidebar = () => {
                 </div>
                 <div onClick={() => {
                     navigate('/home')
+                    pageStateF('Outbox')
+                }} className={pageState === 'Outbox' ? 'activemenu eachmenu' : 'eachmenu'} >
+                    <img src="svg/outbox.svg" alt="" />
+                    <p>Outbox</p>
+                </div>
+                <div onClick={() => {
+                    navigate('/home')
                     pageStateF('Trash')
                 }} className={pageState === 'Trash' ? 'activemenu eachmenu' : 'eachmenu'} >
                     <img src="svg/trash.svg" alt="" />

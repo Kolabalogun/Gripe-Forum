@@ -9,7 +9,7 @@ import Loader from '../Components/Loader';
 import Details from './Details';
 import ResponseDetails from './ResponseDetails';
 
-const Outbox = () => {
+const Trash = () => {
 
     const { setloader, loader } = useGlobalContext()
 
@@ -192,4 +192,4 @@ const Outbox = () => {
     )
 }
 
-export default Outbox
+export default Trash

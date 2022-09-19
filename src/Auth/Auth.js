@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import Navbar from '../Backend/Components/Navbar'
+import Footer from '../Frontend/Components/Footer'
 import { useGlobalContext } from '../Functions/Context'
 import { auth } from '../Utils/Firebase'
 
@@ -10,10 +11,14 @@ const Auth = () => {
 
 
     useEffect(() => {
-        if (user && adminuser !== 'null') {
-            navigate('/admin')
-        } else if (user) {
+        if (user && adminuser === 'null') {
             navigate('/home')
+        } else if (user && adminuser !== 'null') {
+            navigate('/admin')
+        }
+
+        else {
+            navigate('/')
         }
     }, []);
 
@@ -37,6 +42,7 @@ const Auth = () => {
                 </div>
 
             </div>
+            <Footer />
         </>
 
     )

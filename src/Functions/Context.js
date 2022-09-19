@@ -14,11 +14,23 @@ const AppProvider = ({ children }) => {
 
   // for user login confirmation
   const [user, setuser] = useState(localStorage.getItem("isLoggedIn"));
+  const [userloggedIN, setuserloggedIN] = useState(null);
   const [adminuser, setadminuser] = useState(localStorage.getItem("isAdminLoggedIn"));
+
+  //user ID
+
+  const userId = user?.uid
+
+
+  // console.log(user);
+
+  // console.log(adminuser);
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
+
+
         setuser(authUser);
 
       } else {
@@ -133,7 +145,9 @@ const AppProvider = ({ children }) => {
         user,
         setuser,
         adminuser, setadminuser,
+        userloggedIN, setuserloggedIN,
         handleLogout,
+        userId,
 
         navigate,
         loader,

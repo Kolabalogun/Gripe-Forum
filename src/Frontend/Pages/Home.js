@@ -5,6 +5,7 @@ import Sidebar from '../Components/Sidebar'
 import Complain from './Screens/Complain'
 import Dashboard from './Screens/Dashboard'
 import Inbox from './Screens/Inbox'
+import Outbox from './Screens/Outbox'
 import Trash from './Screens/Trash'
 
 
@@ -21,10 +22,11 @@ const Home = () => {
                 {pageState === 'complain' ? <Complain /> :
 
                     pageState === 'Inbox' ? <Inbox /> :
-                        pageState === 'Trash' ? <Trash /> :
+                        pageState === 'Outbox' ? <Outbox /> :
+                            pageState === 'Trash' ? <Trash /> :
 
 
-                            <Dashboard />}
+                                <Dashboard />}
 
             </div>
 

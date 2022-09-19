@@ -2,19 +2,17 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../../../Backend/Components/Loader';
-
 import { useGlobalContext } from '../../../Functions/Context';
 import { db } from '../../../Utils/Firebase';
 import Footer from '../../Components/Footer';
 import ReplyDetails from './ReplyDetails';
 
 
+const Outbox = () => {
 
-const Inbox = () => {
+    const { setloader, loader, userId } = useGlobalContext()
 
-    const { setloader, loader, user } = useGlobalContext()
 
-    const userId = user?.uid
 
     const [complains, complainsF] = useState([]);
 
@@ -66,18 +64,14 @@ const Inbox = () => {
     return (
         <div className='dashboard'>
 
+            {
+                loader ? <Loader /> : <>
+                    <div style={{ minHeight: '70vh' }}>     <div className='topauthnav box'>
+                        <h1>Outbox</h1>
+                        <h3 className='insidenav'>Home  / Resend</h3>
 
-            {loader ? <Loader /> :
 
-
-                <>
-                    <div style={{ minHeight: '70vh' }}>
-
-                        <div className='topauthnav box'>
-                            <h1>Inbox</h1>
-                            <h3 className='insidenav'>Home  / Response</h3>
-
-                        </div>
+                    </div>
 
                         {
                             DetailsPage ? <ReplyDetails /> :
@@ -95,12 +89,12 @@ const Inbox = () => {
                                                 complains.length > 0 ?
                                                     <>
                                                         {complains.map((report, index) => {
-                                                            if (report.reply.replyTxt !== '' && userId === report.userId) {
+                                                            if (userId === report.userId) {
                                                                 return (
                                                                     <div key={index} className="report" >
-                                                                        <h5>Response From Admin</h5>
+                                                                        <h5>{report.title}</h5>
 
-                                                                        <p>{`${report.reply.replyTxt.substring(0, 100)}...`}</p>
+                                                                        <p>{`${report.description.substring(0, 100)}...`}</p>
                                                                         <Link to={`/detail/${report.id}`}>
                                                                             <button className='btn'>See Details</button>
                                                                         </Link>
@@ -109,27 +103,31 @@ const Inbox = () => {
                                                                 );
                                                             }
 
-                                                            // else if (report.reply.replyTxt === '' && userId === report.userId) {
-                                                            //     return (
-                                                            //         <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                            //             <img src='img/aa.png' alt='' />
 
-                                                            //             <p style={{ marginTop: -40 }}>Your Inbox is empty</p>
-                                                            //         </div>
-                                                            //     )
+                                                            // else if (report.reply.replyTxt === '') {
+                                                            //   return (
+                                                            //     <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
+                                                            //       <img src='img/msg.png' alt='' />
+
+                                                            //       <p style={{ marginTop: -40 }}>Your Outbox is empty</p>
+                                                            //     </div>
+                                                            //   )
                                                             // }
 
                                                         }
 
                                                         )}
                                                     </>
+
                                                     :
                                                     <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                        <img src='img/aa.png' alt='' />
+                                                        <img src='img/msg.png' alt='' />
 
-                                                        <p style={{ marginTop: -40 }}>Your Inbox is empty</p>
+                                                        <p style={{ marginTop: -40 }}>Your Outbox is empty</p>
                                                     </div>
                                             }
+
+
 
 
 
@@ -145,8 +143,11 @@ const Inbox = () => {
                         }
                     </div>
                     <Footer />
+
                 </>
             }
+
+
 
 
 
@@ -157,4 +158,4 @@ const Inbox = () => {
     )
 }
 
-export default Inbox
+export default Outbox

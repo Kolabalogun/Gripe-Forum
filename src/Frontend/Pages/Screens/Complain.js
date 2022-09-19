@@ -86,37 +86,39 @@ const Complain = () => {
 
                 <div className='mainbody'>
                     <div style={{ flex: 2 }}>
-                        <div className='topauthnav'>
+                        <div className='topauthnav box'>
                             <h1>Complain</h1>
-
+                            <h3 className='insidenav'>Home  / Send Message</h3>
                         </div>
 
-                        <div className='notificationBox'>
-                            <h3>Please Submit your Report</h3>
 
-                            <div className='form'>
-                                <input type="text"
-                                    onChange={handleChange}
-                                    value={title}
-                                    required
-                                    minLength={3}
-
-                                    name="title" placeholder='Title of Complain' />
-                                <textarea type="text"
-                                    onChange={handleChange}
-                                    value={description}
-                                    required
-                                    rows={11}
-                                    minLength={4}
-
-                                    name="description" placeholder='This is Where you enter all your complains' />
-
-                                <p>{notification}</p>
-                                <button onClick={handleSubmit}>Submit Complain</button>
-                            </div>
+                    </div>
+                    <div className='notificationBox'>
 
 
+                        <div className='form'>
+                            <h3 className='complainheader'>Enter your Complain/Suggestion</h3>
+                            <input type="text"
+                                onChange={handleChange}
+                                value={title}
+                                required
+                                minLength={3}
+
+                                name="title" placeholder='Title of Complain' />
+                            <textarea type="text"
+                                onChange={handleChange}
+                                value={description}
+                                required
+                                rows={11}
+                                minLength={4}
+
+                                name="description" placeholder='This is Where you enter all your complains' />
+
+                            <p>{notification}</p>
+                            <button onClick={handleSubmit}>Submit Complain</button>
                         </div>
+
+
                     </div>
                     <Footer />
                 </div>

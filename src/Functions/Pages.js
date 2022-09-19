@@ -41,7 +41,7 @@ const Pages = () => {
 
               <>
                 {
-                  adminuser !== 'null' ? <>
+                  adminuser !== null ? <>
                     <Route path="/admin" element={<AdminHome />} />
 
                     <Route path="/admin/detail/:id" element={<AdminHome />} />

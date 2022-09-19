@@ -15,7 +15,7 @@ const Trash = () => {
     const { setloader, loader, handleDelete, user } = useGlobalContext()
 
 
-    const userId = user?.id
+    const userId = user?.uid
 
     const [complains, complainsF] = useState([]);
 
@@ -45,19 +45,7 @@ const Trash = () => {
     }, []);
 
 
-    const { id } = useParams()
 
-
-
-    useEffect(() => {
-
-
-        id && DetailsPageF(true);
-
-    }, [id]);
-
-
-    const [DetailsPage, DetailsPageF] = useState(false)
 
 
 
@@ -78,67 +66,66 @@ const Trash = () => {
                     <div style={{ minHeight: '70vh' }}>
 
                         <div className='topauthnav'>
-                            <h1>Trash</h1>
+                            <h1>Trash Message</h1>
 
                         </div>
 
-                        {
-                            DetailsPage ? <Details /> :
-
-                                <>
 
 
-                                    <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
-                                        {/* <h3>Recent Complains</h3> */}
+                        <>
 
 
-                                        <div className='reports'>
-
-                                            {
-                                                complains.length > 0 ?
-
-                                                    <>
-
-                                                        {complains.map((report, index) => {
-                                                            if (report.reply.replyTxt !== '' && userId === report.userId) {
-                                                                return (
-                                                                    <div key={index} className="report" >
-                                                                        <h5>{report.title}</h5>
-
-                                                                        <p>{`${report.description.substring(0, 100)}...`}</p>
-
-                                                                        <button onClick={() => {
-                                                                            handleDelete(report.id)
-                                                                        }} style={{ backgroundColor: 'red' }} className='btn'>Delete</button>
+                            <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
+                                {/* <h3>Recent Complains</h3> */}
 
 
-                                                                    </div>
-                                                                );
-                                                            }
+                                <div className='reports'>
 
-                                                        })}
-                                                    </>
+                                    {
+                                        complains.length > 0 ?
 
-                                                    :
-                                                    <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                        <img src='img/trash.png' alt='' />
+                                            <>
 
-                                                        <p style={{ marginTop: -40 }}>Sorry, there's nothing here!</p>
-                                                    </div>
-                                            }
+                                                {complains.map((report, index) => {
+                                                    if (userId === report.userId) {
+                                                        return (
+                                                            <div key={index} className="report" >
+                                                                <h5>{report.title}</h5>
 
+                                                                <p>{`${report.description.substring(0, 100)}...`}</p>
+
+                                                                <button onClick={() => {
+                                                                    handleDelete(report.id)
+                                                                }} style={{ backgroundColor: 'red' }} className='btn'>Delete</button>
+
+
+                                                            </div>
+                                                        );
+                                                    }
+
+                                                })}
+                                            </>
+
+                                            :
+                                            <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
+                                                <img src='img/trash.png' alt='' />
+
+                                                <p style={{ marginTop: -40 }}>Sorry, there's nothing here!</p>
+                                            </div>
+                                    }
 
 
 
 
 
-                                        </div>
+
+                                </div>
 
 
 
-                                    </div>
-                                </>
-                        }
+                            </div>
+                        </>
+
 
                     </div>
                     <Footer />
