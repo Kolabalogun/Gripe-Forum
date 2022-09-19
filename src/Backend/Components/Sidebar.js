@@ -8,18 +8,18 @@ const Sidebar = () => {
 
 
             <div className="menus">
-                <div onClick={() => {
+                {/* <div onClick={() => {
                     navigate('/admin')
                     pageStateF('default')
 
                 }} className={pageState === 'default' ? 'activemenu eachmenu' : 'eachmenu'} >
                     <img src="svg/dash.svg" alt="" />
                     <p>Dashboard</p>
-                </div>
+                </div> */}
                 <div onClick={() => {
                     navigate('/admin')
-                    pageStateF('Inbox')
-                }} className={pageState === 'Inbox' ? 'activemenu eachmenu' : 'eachmenu'} >
+                    pageStateF('default')
+                }} className={pageState === 'default' ? 'activemenu eachmenu' : 'eachmenu'} >
                     <img src="svg/inbox.svg" alt="" />
                     <p>Inbox</p>
                 </div>

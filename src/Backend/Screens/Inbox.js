@@ -68,9 +68,9 @@ const Inbox = () => {
                     <>
                         <div style={{ minHeight: '70vh' }}>
 
-                            <div className='topauthnav'>
+                            <div className='topauthnav box'>
                                 <h1>Inbox</h1>
-
+                                <h3 className='insidenav'>Home  / Response</h3>
                             </div>
 
                             {
@@ -80,7 +80,6 @@ const Inbox = () => {
 
 
                                         <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
-                                            {/* <h3>Recent Complains</h3> */}
 
 
                                             <div className='reports'>

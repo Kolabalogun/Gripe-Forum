@@ -64,9 +64,9 @@ const Outbox = () => {
 
       {
         loader ? <Loader /> : <>
-          <div style={{ minHeight: '70vh' }}>     <div className='topauthnav'>
+          <div style={{ minHeight: '70vh' }}>     <div className='topauthnav box'>
             <h1>Outbox</h1>
-
+            <h3 className='insidenav'>Home  / Resend</h3>
 
           </div>
 
@@ -77,7 +77,7 @@ const Outbox = () => {
 
 
                   <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
-                    {complains.length > 0 && <h3>These are list of responses</h3>}
+
 
 
                     <div className='reports'>

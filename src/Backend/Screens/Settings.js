@@ -150,7 +150,7 @@ const Settings = ({ user, handleLogout, pageType, pageTypeF }) => {
                     <div className="authform">
                         <form onSubmit={handleAuth}>
                             <div className="authTitle">
-                                <h3>{!signUp ? "Sign In" : "Sign Up"}</h3>
+                                <h3>{!signUp ? "Sign In" : "Add Admin User"}</h3>
                             </div>
 
                             {signUp && (

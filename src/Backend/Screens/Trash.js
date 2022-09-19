@@ -99,7 +99,7 @@ const Trash = () => {
                         <div style={{ minHeight: '70vh' }}>
 
                             <div className='topauthnav'>
-                                <h1>Trash</h1>
+                                <h1>Trash Message</h1>
 
 
                             </div>
