@@ -23,7 +23,7 @@ const Chart = () => {
   ];
 
 
-  const data = [{ name: 'Application', uv: 3, pv: 3, amt: 0 }, { name: 'Complains', uv: 3, pv: 2, amt: 0 }, { name: 'Response', uv: 1, pv: 2, amt: 0 },];
+  const data = [{ name: 'Application', uv: 3, pv: 3, amt: 3 }, { name: 'Complains', uv: 3, pv: 2, amt: 0 }, { name: 'Response', uv: 1, pv: 2, amt: 0 },];
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -49,6 +49,7 @@ const Chart = () => {
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
           <Line type="monotone" dataKey="uv" stroke="#8884d8" />
           <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
+          <Line type="monotone" dataKey="amt" stroke="rgb(255, 119, 29" />
         </LineChart>
 
 
