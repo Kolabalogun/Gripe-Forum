@@ -34,6 +34,8 @@ const AdminHome = () => {
 
                 {pageState === 'default' ? <Inbox /> :
 
+
+
                     pageState === 'Outbox' ? <Outbox /> :
                         pageState === 'Trash' ? <Trash /> : pageState === 'settings' ? <Settings /> :
                             <Inbox />}

@@ -109,15 +109,6 @@ const Inbox = () => {
                                                                 );
                                                             }
 
-                                                            // else if (report.reply.replyTxt === '' && userId === report.userId) {
-                                                            //     return (
-                                                            //         <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                            //             <img src='img/aa.png' alt='' />
-
-                                                            //             <p style={{ marginTop: -40 }}>Your Inbox is empty</p>
-                                                            //         </div>
-                                                            //     )
-                                                            // }
 
                                                         }
 

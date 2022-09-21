@@ -68,95 +68,68 @@ const Dashboard = () => {
 
 
 
+
+
     return (
-
-
         <div className='dashboard'>
 
-            <>
-                {loader ? <Loader /> :
-
-                    <>
-
-                        {DetailsPage ? <ReplyDetails /> :
-                            <div>
-                                <div style={{ flex: 2, minHeight: '70vh' }}>
-                                    <div className='topauthnav'>
-                                        <h1>Dashboard</h1>
-
-                                    </div>
-
-                                    <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
-                                        <h3>            {
-                                            complains.length > 0 ? 'Recent Replies' : 'Your Dashboard is empty'}</h3>
+            {loader ? <Loader /> :
+                <div>
+                    <div style={{ flex: 2, minHeight: '70vh' }}>
+                        <div className='topauthnav'>
+                            <h1>Dashboard</h1>
+                        </div>
 
 
-                                        <div className='reports'>
-
-                                            {
-                                                complains.length > 0 ?
-                                                    <>
-                                                        {itemsToRenderCourse.map((report, index) => {
-                                                            // console.log(report);
-                                                            if (report.reply.replyTxt !== '' && userId === report.userId) {
-
-                                                                return (
-                                                                    <div key={index} className="report" >
-                                                                        <h5>Response From Admin</h5>
-
-                                                                        <p>{`${report.reply.replyTxt.substring(0, 100)}...`}</p>
-                                                                        <Link to={`/detail/${report.id}`}>
-                                                                            <button className='btn'>See Reply</button>
-                                                                        </Link>
-
-                                                                    </div>
-                                                                );
-                                                            }
-
-                                                            // else if (report.reply.replyTxt.length === 0 && userId !== report.userId) {
-                                                            //     return (
-                                                            //         <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                            //             <img src='img/dash.png' alt='' />
-
-                                                            //             <p style={{ marginTop: -40 }}>Your Dashboard is empty</p>
-                                                            //         </div>
-                                                            //     )
-                                                            // }
-
-                                                        }
-
-                                                        )}</> :
 
 
-                                                    <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                        <img src='img/dash.png' alt='' />
 
-                                                        <p style={{ marginTop: -40 }}>Your dashboard is empty</p>
+
+                        <div className='dash'>
+                            <div className='dashBox chart'>
+                                <h1>Charts</h1>
+                            </div>
+                            <div className='dashBox replys'>
+                                <h3 className='complainheader'>Recent Replies</h3>
+                                <div className='reply-section'>
+
+
+                                    {complains.map((report, index) => {
+                                        if (report.reply.replyTxt !== '' && userId === report.userId) {
+                                            return (
+                                                <div key={index} className='replyswithTime'>
+                                                    <div className='time'>
+                                                        32 min
                                                     </div>
+                                                    <div className='divider'>
+                                                        <span className='dot'>
 
-                                            }
+                                                        </span>
+                                                        <span className='line'>
+
+                                                        </span>
+
+                                                    </div>
+                                                    <div className='msgggg'>
+                                                        {`${report.reply.replyTxt.substring(0, 35)}...`}
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+
+
+                                    }
+
+                                    )}
 
 
 
 
 
-
-
-                                        </div>
-
-
-
-                                    </div>
                                 </div>
-                                <Footer />
 
                             </div>
-                        }
-
-
-                    </>
-                }
-            </>
+                        </div>
 
 
 
@@ -164,14 +137,14 @@ const Dashboard = () => {
 
 
 
+                    </div>
+                    <Footer />
+
+                </div>
 
 
 
-
-
-
-
-
+            }
         </div >
     )
 }

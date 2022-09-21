@@ -97,6 +97,13 @@ const ResponseDetails = ({ offreplySection }) => {
 
 
 
+
+
+    // let nn = 19 / 09 / 2022, 15: 01: 33
+
+
+
+
     return (
         <>
             {loader ? (
@@ -108,6 +115,13 @@ const ResponseDetails = ({ offreplySection }) => {
 
                         <div className="report" >
                             <h5>{complain.title}</h5>
+
+                            <p>{complain.description}</p>
+
+                        </div>
+
+                        <div className="report" style={{ marginTop: 30 }} >
+                            <h5>Response from Admin</h5>
 
                             <p>{complain.reply.replyTxt}</p>
 
