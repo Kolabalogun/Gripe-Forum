@@ -5,6 +5,7 @@ import Loader from '../../../Backend/Components/Loader';
 import { useGlobalContext } from '../../../Functions/Context';
 import { db } from '../../../Utils/Firebase';
 import Footer from '../../Components/Footer';
+import Chart from '../../Components/Chart';
 import ReplyDetails from './ReplyDetails';
 
 const Dashboard = () => {
@@ -64,8 +65,44 @@ const Dashboard = () => {
 
 
 
-    const itemsToRenderCourse = complains.slice(0, 4);
+    const itemsToRenderCourse = complains.slice(0, 7);
 
+    // console.log(complains.length);
+
+
+
+    // const [res, resF] = useState('')
+
+
+    // function rr() {
+    //     let cc = [];
+
+
+
+    //     itemsToRenderCourse.map((report, index) => {
+    //         if (report.reply.replyTxt !== '' && userId === report.userId) {
+
+    //             let ccd = report.reply
+    //             console.log(report.reply);
+    //             cc.push({ ccd })
+
+    //         }
+
+
+    //         resF(cc)
+
+
+    //     }
+
+    //     )
+
+    //     // return rrd
+
+    // }
+
+    // console.log(rr());
+
+    console.log(complains);
 
 
 
@@ -87,19 +124,21 @@ const Dashboard = () => {
 
                         <div className='dash'>
                             <div className='dashBox chart'>
-                                <h1>Charts</h1>
+                                <h3 className='complainheader'>Reports</h3>
+                                <Chart />
                             </div>
                             <div className='dashBox replys'>
                                 <h3 className='complainheader'>Recent Replies</h3>
                                 <div className='reply-section'>
 
 
-                                    {complains.map((report, index) => {
+                                    {itemsToRenderCourse.map((report, index) => {
                                         if (report.reply.replyTxt !== '' && userId === report.userId) {
+
                                             return (
                                                 <div key={index} className='replyswithTime'>
                                                     <div className='time'>
-                                                        32 min
+                                                        {report.timestamp.toDate().toLocaleTimeString()}
                                                     </div>
                                                     <div className='divider'>
                                                         <span className='dot'>
