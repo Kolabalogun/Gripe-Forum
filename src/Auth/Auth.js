@@ -31,7 +31,7 @@ const Auth = () => {
             <Navbar />
             <div className='authbody'>
                 <h1>Welcome to Gripe Forum</h1>
-                <p>Here you can send an anonymous message to the School Adminstrator.</p>
+                {/* <p>Here you can send an anonymous message to the School Adminstrator.</p> */}
                 <p>To Continue, Sign in with your Google Account</p>
 
                 <div onClick={signInWithGoogle} className="commmetSignIn">
