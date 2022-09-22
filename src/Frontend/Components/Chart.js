@@ -1,20 +1,17 @@
 import React from "react";
 
 import {
-  PieChart,
-  Pie,
-  Tooltip,
-  BarChart,
+
   XAxis,
   YAxis,
-  Legend,
+
   CartesianGrid,
-  Bar,
+
   LineChart,
   Line,
 } from "recharts";
 
-const Chart = () => {
+const Chart = ({ application, response, complains }) => {
   const data1 = [
     { name: "Application", users: 2000000000 },
     { name: "Response", users: 1500000000 },
@@ -22,8 +19,10 @@ const Chart = () => {
 
   ];
 
+  console.log(response);
 
-  const data = [{ name: 'Application', uv: 3, pv: 3, amt: 3 }, { name: 'Complains', uv: 3, pv: 2, amt: 0 }, { name: 'Response', uv: 1, pv: 2, amt: 0 },];
+
+  const data = [{ name: 'Application', uv: application, pv: application, amt: application }, { name: 'Complains', uv: complains, pv: complains, amt: 0 }, { name: 'Response', uv: 2, pv: 1, amt: 0 },];
 
   return (
     <div style={{ textAlign: "center" }}>
@@ -47,7 +46,7 @@ const Chart = () => {
           <XAxis dataKey="name" />
           <YAxis />
           <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-          <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+          <Line type="monotone" dataKey="uv" stroke="rgb(65, 84, 241)" />
           <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
           <Line type="monotone" dataKey="amt" stroke="rgb(255, 119, 29" />
         </LineChart>

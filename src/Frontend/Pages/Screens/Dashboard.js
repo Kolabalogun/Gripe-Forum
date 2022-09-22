@@ -16,6 +16,7 @@ const Dashboard = () => {
     // console.log(userId);
 
 
+
     const [complains, complainsF] = useState([
         {
             reply: {
@@ -36,6 +37,7 @@ const Dashboard = () => {
                 snapshot.docs.forEach((doc) => {
                     list.push({ id: doc.id, ...doc.data() });
                 });
+                defaultfF(list);
                 complainsF(list);
                 setloader(false);
             },
@@ -71,38 +73,53 @@ const Dashboard = () => {
 
 
 
-    // const [res, resF] = useState('')
+    const [defaultf, defaultfF] = useState(null)
+
+    const [application, applicationF] = useState(0)
+    const [complainsn, complainsnF] = useState(0)
+    const [response, responseF] = useState(0)
 
 
-    // function rr() {
-    //     let cc = [];
+    function cll() {
+
+
+        if (defaultf) {
+
+            const newData = defaultf.filter((p) => p.userId === userId);
+
+            applicationF(newData.length);
 
 
 
-    //     itemsToRenderCourse.map((report, index) => {
-    //         if (report.reply.replyTxt !== '' && userId === report.userId) {
 
-    //             let ccd = report.reply
-    //             console.log(report.reply);
-    //             cc.push({ ccd })
+            // responseF(newRes);
+            const newCom = defaultf.filter((p) => p.userId === userId);
 
-    //         }
+            complainsnF(newCom.length);
+        }
 
 
-    //         resF(cc)
 
 
-    //     }
 
-    //     )
 
-    //     // return rrd
+    }
 
-    // }
+    console.log(response);
 
-    // console.log(rr());
 
-    console.log(complains);
+
+
+    useEffect(() => {
+        cll()
+
+
+
+    }, [defaultf])
+
+
+    // console.log(defaultf);
+
 
 
 
@@ -125,7 +142,7 @@ const Dashboard = () => {
                         <div className='dash'>
                             <div className='dashBox chart'>
                                 <h3 className='complainheader'>Reports</h3>
-                                <Chart />
+                                <Chart application={application} complains={complainsn} />
                             </div>
                             <div className='dashBox replys'>
                                 <h3 className='complainheader'>Recent Replies</h3>
