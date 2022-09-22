@@ -4,18 +4,10 @@ import { useGlobalContext } from '../../Functions/Context'
 const Sidebar = () => {
     const { pageState, pageStateF, navigate } = useGlobalContext()
     return (
-        <div className='adminSidebar normalmediaQuery'>
+        <div className='adminSidebar '>
 
 
             <div className="menus">
-                {/* <div onClick={() => {
-                    navigate('/admin')
-                    pageStateF('default')
-
-                }} className={pageState === 'default' ? 'activemenu eachmenu' : 'eachmenu'} >
-                    <img src="svg/dash.svg" alt="" />
-                    <p>Dashboard</p>
-                </div> */}
                 <div onClick={() => {
                     navigate('/admin')
                     pageStateF('default')

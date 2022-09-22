@@ -1,41 +1,15 @@
-import { collection, onSnapshot } from 'firebase/firestore';
+
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../../Frontend/Components/Footer';
 import { useGlobalContext } from '../../Functions/Context';
-import { db } from '../../Utils/Firebase';
+
 import Loader from '../Components/Loader';
 import Details from './Details';
 
 const Inbox = () => {
 
-    const { setloader, loader } = useGlobalContext()
-
-    const [complains, complainsF] = useState([]);
-
-    useEffect(() => {
-        setloader(true);
-        const unsub = onSnapshot(
-            collection(db, "complains"),
-
-            (snapshot) => {
-                let list = [];
-
-                snapshot.docs.forEach((doc) => {
-                    list.push({ id: doc.id, ...doc.data() });
-                });
-                complainsF(list);
-                setloader(false);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-
-        return () => {
-            unsub();
-        };
-    }, []);
+    const { loader, complains } = useGlobalContext()
 
 
     const { id } = useParams()
@@ -43,25 +17,17 @@ const Inbox = () => {
 
 
     useEffect(() => {
-
-
         id && DetailsPageF(true);
-
     }, [id]);
 
 
+
+    // state responsible for switching between noraml page and details
     const [DetailsPage, DetailsPageF] = useState(false)
-
-
-
-
-
 
 
     return (
         <div className='dashboard'>
-
-
             {
                 loader ? <Loader /> :
 

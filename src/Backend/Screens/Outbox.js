@@ -3,41 +3,14 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Footer from '../../Frontend/Components/Footer';
 import { useGlobalContext } from '../../Functions/Context';
-import { db } from '../../Utils/Firebase';
+
 import Loader from '../Components/Loader';
-import Details from './Details';
+
 import ResponseDetails from './ResponseDetails';
 
 const Outbox = () => {
 
-  const { setloader, loader } = useGlobalContext()
-
-  const [complains, complainsF] = useState([]);
-
-  useEffect(() => {
-    setloader(true);
-    const unsub = onSnapshot(
-      collection(db, "complains"),
-
-      (snapshot) => {
-        let list = [];
-
-        snapshot.docs.forEach((doc) => {
-          list.push({ id: doc.id, ...doc.data() });
-        });
-        complainsF(list);
-        setloader(false);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-    return () => {
-      unsub();
-    };
-  }, []);
-
+  const { loader, complains } = useGlobalContext()
 
   const { id } = useParams()
 
@@ -50,7 +23,7 @@ const Outbox = () => {
 
   }, [id]);
 
-
+  // state responsible for switching between noraml page and details
   const [DetailsPage, DetailsPageF] = useState(false)
 
 
@@ -99,18 +72,6 @@ const Outbox = () => {
                                   </div>
                                 );
                               }
-
-
-                              // else if (report.reply.replyTxt === '') {
-                              //   return (
-                              //     <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                              //       <img src='img/msg.png' alt='' />
-
-                              //       <p style={{ marginTop: -40 }}>Your Outbox is empty</p>
-                              //     </div>
-                              //   )
-                              // }
-
                             }
 
                             )}

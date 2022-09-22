@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const initialState = {
     confirmPassword: "",
 };
 
-const categoryOptions = ["SuperAdmin", "SubAdmin"];
+
 
 const Settings = ({ user, handleLogout, pageType, pageTypeF }) => {
     const { loader, setloader, notification, notificationF, } =

@@ -1,5 +1,5 @@
 import { signInWithPopup, signOut } from "firebase/auth";
-import { addDoc, collection, deleteDoc, doc, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -14,23 +14,17 @@ const AppProvider = ({ children }) => {
 
   // for user login confirmation
   const [user, setuser] = useState(localStorage.getItem("isLoggedIn"));
-  const [userloggedIN, setuserloggedIN] = useState(null);
+
   const [adminuser, setadminuser] = useState(localStorage.getItem("isAdminLoggedIn"));
 
   //user ID
-
   const userId = user?.uid
 
 
-  // console.log(user);
-
-  // console.log(adminuser);
-
+  //check if user is signed in
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-
-
         setuser(authUser);
 
       } else {
@@ -40,6 +34,8 @@ const AppProvider = ({ children }) => {
     });
   }, []);
 
+
+  // Sign In with Google 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider).then((result) => {
 
@@ -67,7 +63,6 @@ const AppProvider = ({ children }) => {
   const handleLogout = () => {
     signOut(auth).then(() => {
 
-
       setuser(null);
       localStorage.setItem("isLoggedIn", null);
       localStorage.setItem("isAdminLoggedIn", null);
@@ -82,8 +77,8 @@ const AppProvider = ({ children }) => {
 
 
   //   this is for the loader
-
   const [loader, setloader] = useState(false);
+
 
   //   to determine the id of the page
   const { id } = useParams();
@@ -102,26 +97,11 @@ const AppProvider = ({ children }) => {
   }, [notification]);
 
 
-
-
-
   // Admin Page STate 
-
   const [pageState, pageStateF] = useState('default')
 
 
-
-
-
-  // TYpe of User 
-
-
-
-
-
-
-
-  // to delete blogs
+  // to delete complains
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this Complain?")) {
       try {
@@ -137,6 +117,45 @@ const AppProvider = ({ children }) => {
 
 
 
+  // to set timeId
+  const [dateId, setdateId] = useState("");
+  useEffect(() => {
+    const dateId = new Date().getTime();
+    setdateId(dateId);
+  }, []);
+
+
+
+  // get complains from database
+
+  const [complains, complainsF] = useState([]);
+
+  useEffect(() => {
+    setloader(true);
+    const unsub = onSnapshot(
+      collection(db, "complains"),
+
+      (snapshot) => {
+        let list = [];
+
+        snapshot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        complainsF(list);
+        setloader(false);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
+
+
 
 
   return (
@@ -145,7 +164,7 @@ const AppProvider = ({ children }) => {
         user,
         setuser,
         adminuser, setadminuser,
-        userloggedIN, setuserloggedIN,
+
         handleLogout,
         userId,
 
@@ -159,7 +178,8 @@ const AppProvider = ({ children }) => {
         pageState, pageStateF,
         signInWithGoogle,
 
-        handleDelete
+        handleDelete,
+        dateId, complains
 
       }}
     >

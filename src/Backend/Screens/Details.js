@@ -10,35 +10,26 @@ import Loader from "../Components/Loader";
 
 const Details = ({ offreplySection }) => {
 
+    const { loader, setloader } = useGlobalContext()
+
+    const { id } = useParams()
+
 
     const [complain, complainF] = useState({
         title: '',
         description: '',
         reply: {
-
             replyTxt: "",
-
             dateId: '',
         }
-
     }
 
     );
 
 
-    const { loader, setloader } = useGlobalContext()
-
-
-    const { id } = useParams()
-
-
     useEffect(() => {
-        // setloader(true);
         id && getcomplainDetails();
-
     }, [id]);
-
-
 
     const getcomplainDetails = async () => {
         const docRef = doc(db, "complains", id);
@@ -49,8 +40,6 @@ const Details = ({ offreplySection }) => {
     };
 
 
-
-
     // #=============================================#
     // reply Info
     const dateId = new Date().toLocaleDateString();
@@ -58,7 +47,6 @@ const Details = ({ offreplySection }) => {
     const [replyObj, replyObjF] = useState({
 
         replyTxt: "",
-
         dateId: dateId,
     });
 
