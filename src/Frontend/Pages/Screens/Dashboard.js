@@ -141,8 +141,10 @@ const Dashboard = () => {
 
                         <div className='dash'>
                             <div className='dashBox chart'>
-                                <h3 className='complainheader'>Reports</h3>
-                                <Chart application={application} complains={complainsn} />
+
+                                <img src='img/chart.png' alt='' />
+                                {/* <h3 className='complainheader'>Reports</h3>
+                                <Chart application={application} complains={complainsn} /> */}
                             </div>
                             <div className='dashBox replys'>
                                 <h3 className='complainheader'>Recent Replies</h3>
