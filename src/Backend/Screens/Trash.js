@@ -1,18 +1,21 @@
-import { collection, doc, onSnapshot, updateDoc } from 'firebase/firestore';
+
+
+import { collection, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
 import Footer from '../../Frontend/Components/Footer';
 import { useGlobalContext } from '../../Functions/Context';
 import { db } from '../../Utils/Firebase';
 import Loader from '../Components/Loader';
-import Details from './Details';
-import ResponseDetails from './ResponseDetails';
+
+
+
+
 
 const Trash = () => {
 
-    const { setloader, loader } = useGlobalContext()
-
+    const { setloader, loader, handleDelete } = useGlobalContext()
+   
     const [complains, complainsF] = useState([]);
 
     useEffect(() => {
@@ -27,8 +30,9 @@ const Trash = () => {
                     list.push({ id: doc.id, ...doc.data() });
                 });
                 complainsF(list);
-                setloader(false);
+                setloader(false)
             },
+
             (error) => {
                 console.log(error);
             }
@@ -40,48 +44,9 @@ const Trash = () => {
     }, []);
 
 
-    const { id } = useParams()
 
 
 
-    useEffect(() => {
-
-
-        id && DetailsPageF(true);
-
-    }, [id]);
-
-
-    const [DetailsPage, DetailsPageF] = useState(false)
-
-
-    // #=============================================#
-    // reply Info
-    const dateId = new Date().toLocaleDateString();
-
-    const [replyObj, replyObjF] = useState({
-
-        replyTxt: "",
-
-        dateId: dateId,
-    });
-
-
-
-    // Function responsible for deleting replies 
-
-    const wIP = async (id) => {
-        try {
-            await updateDoc(doc(db, "complains", id), {
-                ...complains,
-                reply: replyObj,
-            });
-            toast.success("Response Deleted");
-        } catch (err) {
-            console.log(err);
-            toast.error("Response Error");
-        }
-    };
 
 
 
@@ -90,97 +55,80 @@ const Trash = () => {
     return (
         <div className='dashboard'>
 
-            {
-                loader ? <Loader /> :
+
+            {loader ? <Loader />
 
 
-                    <>
+                :
 
-                        <div style={{ minHeight: '70vh' }}>
+                <>
+                    <div style={{ minHeight: '70vh' }}>
 
-                            <div className='topauthnav'>
-                                <h1>Trash Message</h1>
+                        <div className='topauthnav'>
+                            <h1>Trash Message</h1>
+
+                        </div>
+
+
+
+                        <>
+
+
+                            <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
+                                {/* <h3>Recent Complains</h3> */}
+
+
+                                <div className='reports'>
+
+                                    {
+                                        complains.length > 0 ?
+
+                                            <>
+
+                                                {complains.map((report, index) =>
+
+                                                    <div key={index} className="report" >
+                                                        <h5>{report.title}</h5>
+
+                                                        <p>{`${report.description.substring(0, 100)}...`}</p>
+
+                                                        <button onClick={() => {
+                                                            handleDelete(report.id)
+                                                        }} style={{ backgroundColor: 'red' }} className='btn'>Delete</button>
+
+
+                                                    </div>
+
+
+                                                )}
+                                            </>
+
+                                            :
+                                            <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
+                                                <img src='img/trash.png' alt='' />
+
+                                                <p style={{ marginTop: -40 }}>Sorry, there's nothing here!</p>
+                                            </div>
+                                    }
+
+
+
+
+
+
+                                </div>
+
 
 
                             </div>
-
-                            {
-                                DetailsPage ? <ResponseDetails /> :
-
-                                    <>
+                        </>
 
 
-                                        <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
-                                            {/* <h3>These are list of responses</h3> */}
+                    </div>
+                    <Footer />
+                </>}
 
 
-                                            <div className='reports'>
-
-                                                {
-                                                    complains.length > 0 ?
-
-                                                        <>
-                                                            {complains.map((report, index) => {
-                                                                if (report.reply.replyTxt !== '') {
-                                                                    return (
-                                                                        <div key={index} className="report" >
-                                                                            <h5>Response From Admin</h5>
-
-                                                                            <p>{`${report.reply.replyTxt.substring(0, 100)}...`}</p>
-
-                                                                            <button onClick={() => wIP(report.id)} style={{ backgroundColor: 'red' }} className='btn'>Delete</button>
-
-
-                                                                        </div>
-                                                                    );
-                                                                }
-
-
-                                                                // else if (report.reply.replyTxt === '') {
-                                                                //     return (
-                                                                //         <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                                //             <img src='img/trash.png' alt='' />
-
-                                                                //             <p style={{ marginTop: -40 }}>Sorry, there's nothing here!</p>
-                                                                //         </div>
-                                                                //     )
-                                                                // }
-
-                                                            }
-
-                                                            )}
-                                                        </>
-                                                        :
-                                                        <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                            <img src='img/trash.png' alt='' />
-
-                                                            <p style={{ marginTop: -40 }}>Sorry, there's nothing here!</p>
-                                                        </div>
-                                                }
-
-
-
-
-
-
-
-
-                                            </div>
-
-
-
-                                        </div>
-                                    </>
-                            }
-
-                        </div>
-                        <Footer />
-
-                    </>
-
-
-
-            }
 
 
 
