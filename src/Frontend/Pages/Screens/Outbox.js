@@ -1,6 +1,7 @@
 import { collection, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Loader from '../../../Backend/Components/Loader';
 import { useGlobalContext } from '../../../Functions/Context';
 import { db } from '../../../Utils/Firebase';
@@ -95,9 +96,11 @@ const Outbox = () => {
                                                                         <h5>{report.title}</h5>
 
                                                                         <p>{`${report.description.substring(0, 100)}...`}</p>
-                                                                        <Link to={`/detail/${report.id}`}>
-                                                                            <button className='btn'>See Details</button>
-                                                                        </Link>
+                                                                        {/* <Link to={`/detail/${report.id}`}> */}
+                                                                        <button onClick={() => {
+                                                                            toast('Complain Sent')
+                                                                        }} className='btn'>Resend</button>
+                                                                        {/* </Link> */}
 
                                                                     </div>
                                                                 );

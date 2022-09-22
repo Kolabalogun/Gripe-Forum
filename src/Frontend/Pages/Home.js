@@ -23,10 +23,10 @@ const Home = () => {
 
                     pageState === 'Inbox' ? <Inbox /> :
                         pageState === 'Outbox' ? <Outbox /> :
-                            pageState === 'Trash' ? <Trash /> :
 
 
-                                <Dashboard />}
+
+                            <Dashboard />}
 
             </div>
 

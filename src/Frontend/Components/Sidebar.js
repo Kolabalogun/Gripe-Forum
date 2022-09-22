@@ -36,13 +36,7 @@ const Sidebar = () => {
                     <img src="svg/outbox.svg" alt="" />
                     <p>Outbox</p>
                 </div>
-                <div onClick={() => {
-                    navigate('/home')
-                    pageStateF('Trash')
-                }} className={pageState === 'Trash' ? 'activemenu eachmenu' : 'eachmenu'} >
-                    <img src="svg/trash.svg" alt="" />
-                    <p>Trash</p>
-                </div>
+
 
             </div>
 
