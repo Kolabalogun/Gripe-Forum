@@ -155,6 +155,17 @@ const AppProvider = ({ children }) => {
   }, []);
 
 
+  // Convert HTML tags to strings 
+  function removeTags(str) {
+    if ((str === null) || (str === ''))
+      return false;
+    else
+      str = str.toString();
+    return str.replace(/(<([^>]+)>)/ig, '');
+  }
+
+
+
 
 
 
@@ -179,7 +190,7 @@ const AppProvider = ({ children }) => {
         signInWithGoogle,
 
         handleDelete,
-        dateId, complains
+        dateId, complains, removeTags
 
       }}
     >

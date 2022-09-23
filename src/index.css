@@ -29,6 +29,10 @@ header {
   justify-content: space-between;
 }
 
+.logo {
+  width: 250px;
+}
+
 .logo > h1 {
   font-size: 25px;
   color: #1f98d1;
@@ -51,9 +55,148 @@ header {
 .userNav {
   display: flex;
   align-items: center;
+  flex: 2;
+  justify-content: space-between;
 }
 .userNav > p {
   padding-right: 10px;
+}
+.search {
+  display: flex;
+}
+
+.inputt {
+  margin-left: 20px;
+  display: flex;
+}
+
+.inputt > input {
+  height: 30px;
+  border: 1px solid #aaa;
+  outline: none;
+  width: 250px;
+  padding: 2px 5px;
+}
+
+.inputt > img {
+  height: 20px;
+  margin: 7px 0 0 -30px;
+}
+
+.bar {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  position: relative;
+}
+
+.bar > img {
+  height: 100%;
+  width: 100%;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.nn {
+  height: 20px;
+  width: 20px;
+  margin: 0 15px;
+}
+
+.nnc {
+  display: flex;
+  margin: 0 15px;
+  align-items: center;
+}
+
+.nnc > img {
+  height: 30px;
+  width: 30px;
+  margin: 0px 5px;
+}
+.nnc > span {
+  font-size: 15px;
+  font-weight: 600;
+  color: #012970;
+  cursor: pointer;
+}
+.nnc > span::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+}
+
+.dropdown {
+  z-index: 99;
+  min-width: 240px;
+  padding-bottom: 0;
+  position: absolute;
+  background-color: white;
+  position: absolute;
+  inset: 0px 0px auto auto;
+  padding: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin: 10px 0;
+  transform: translate(-16px, 54px);
+  box-shadow: 0 5px 30px 0 rgba(82, 63, 105, 0.2);
+}
+.dropdown > li {
+  /* display: block; */
+  list-style: none;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  color: #000;
+  white-space: nowrap;
+  text-align: center;
+  font-size: 15px;
+
+  border-bottom: 1px solid #aaa;
+}
+
+.notifys {
+  position: absolute;
+  inset: 4px 6px auto auto;
+  font-weight: normal;
+  font-size: 11px;
+  padding: 3px 6px;
+  background-color: #0d6efd;
+  border-radius: 5px;
+  color: white;
+  top: -10px;
+  right: -9px;
+}
+
+.name {
+  padding-bottom: 1.5rem;
+  font-size: 15px;
+}
+.name > p {
+  font-size: 18px;
+  margin-bottom: 0;
+  font-weight: 600;
+  color: #444444;
+}
+.dropdown > li > img {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.btna {
+  display: flex;
+  align-items: center;
+  /* padding: 10px 25px; */
+  justify-items: center;
+  text-align: center;
+  cursor: pointer;
 }
 
 .home {

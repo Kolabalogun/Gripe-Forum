@@ -17,8 +17,6 @@ const Pages = () => {
 
   const { user, adminuser } = useGlobalContext()
 
-
-
   const location = useLocation();
   return (
     <AnimatePresence exitBeforeEnter>
@@ -53,72 +51,11 @@ const Pages = () => {
                 }
 
               </>
-
             </>
-
             :
-
             <Route path="/" element={<Auth />} />
 
         }
-
-        {/* 
-        <Route path="/adminauth" element={<AdminAuth />} />
-        <Route path="/admin" element={<AdminHome />} />
-
-        {
-          user && <>
-            <Route path="/home" element={<Home />} />
-            <Route path="/detail/:id" element={<Home />} />
-          </>
-        }
-
-
-        {
-          adminuser !== 'null' && user && <>
-            <Route path="/admin" element={<AdminHome />} />
-
-            <Route path="/admin/detail/:id" element={<AdminHome />} />
-
-
-          </>
-        } */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       </Routes>
     </AnimatePresence>
   );

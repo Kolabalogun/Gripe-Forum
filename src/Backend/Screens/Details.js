@@ -111,17 +111,6 @@ const Details = ({ offreplySection }) => {
 
                                 <form>
                                     <div className="commentFlex">
-                                        {/* <input type="text"
-                                    onChange={handleReplyChange}
-                                    value={title}
-                                    required
-                                    minLength={4}
-
-                                    
-
-
-                                    name="title" placeholder='Title of Response' /> */}
-
                                     </div>
 
                                     <textarea type="text"
@@ -139,7 +128,7 @@ const Details = ({ offreplySection }) => {
                             </div>}
 
                     </div>
-                    <Footer />
+
                 </>
             )}
         </>

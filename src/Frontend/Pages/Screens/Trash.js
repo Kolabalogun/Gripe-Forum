@@ -1,8 +1,6 @@
 import { collection, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
 import Loader from '../../../Backend/Components/Loader';
-import Details from '../../../Backend/Screens/Details';
 import { useGlobalContext } from '../../../Functions/Context';
 import { db } from '../../../Utils/Firebase';
 import Footer from '../../Components/Footer';
@@ -12,56 +10,14 @@ import Footer from '../../Components/Footer';
 
 const Trash = () => {
 
-    const { setloader, loader, handleDelete, user } = useGlobalContext()
-
-
-    const userId = user?.uid
-
-    const [complains, complainsF] = useState([]);
-
-    useEffect(() => {
-        setloader(true);
-        const unsub = onSnapshot(
-            collection(db, "complains"),
-
-            (snapshot) => {
-                let list = [];
-
-                snapshot.docs.forEach((doc) => {
-                    list.push({ id: doc.id, ...doc.data() });
-                });
-                complainsF(list);
-                setloader(false)
-            },
-
-            (error) => {
-                console.log(error);
-            }
-        );
-
-        return () => {
-            unsub();
-        };
-    }, []);
-
-
-
-
-
-
-
+    const { loader, handleDelete, complains, userId } = useGlobalContext()
 
 
 
     return (
         <div className='dashboard'>
-
-
             {loader ? <Loader />
-
-
                 :
-
                 <>
                     <div style={{ minHeight: '70vh' }}>
 
@@ -69,14 +25,11 @@ const Trash = () => {
                             <h1>Trash Message</h1>
 
                         </div>
-
-
-
                         <>
 
 
                             <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
-                                {/* <h3>Recent Complains</h3> */}
+
 
 
                                 <div className='reports'>

@@ -9,7 +9,7 @@ import Details from './Details';
 
 const Inbox = () => {
 
-    const { loader, complains } = useGlobalContext()
+    const { loader, complains, removeTags } = useGlobalContext()
 
 
     const { id } = useParams()
@@ -62,7 +62,7 @@ const Inbox = () => {
                                                                 <div key={index} className="report" >
                                                                     <h5>{report.title}</h5>
 
-                                                                    <p>{`${report.description.substring(0, 100)}...`}</p>
+                                                                    <p>{`${removeTags(report.description.substring(0, 100))}...`}</p>
                                                                     <Link to={`/admin/detail/${report.id}`}>
                                                                         <button className='btn'>See Complain</button>
                                                                     </Link>

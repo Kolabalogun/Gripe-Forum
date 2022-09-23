@@ -1,19 +1,17 @@
 import { collection, doc, getDoc, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Loader from '../../../Backend/Components/Loader';
 import { useGlobalContext } from '../../../Functions/Context';
 import { db } from '../../../Utils/Firebase';
 import Footer from '../../Components/Footer';
-import Chart from '../../Components/Chart';
-import ReplyDetails from './ReplyDetails';
+
+
 
 const Dashboard = () => {
     const { loader, setloader, user } = useGlobalContext()
 
     const userId = user?.uid
-
-    // console.log(userId);
 
 
 
@@ -112,9 +110,6 @@ const Dashboard = () => {
 
     useEffect(() => {
         cll()
-
-
-
     }, [defaultf])
 
 
@@ -133,12 +128,6 @@ const Dashboard = () => {
                         <div className='topauthnav'>
                             <h1>Dashboard</h1>
                         </div>
-
-
-
-
-
-
                         <div className='dash'>
                             <div className='dashBox chart'>
 

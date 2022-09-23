@@ -1,62 +1,32 @@
-import { collection, onSnapshot } from 'firebase/firestore';
+
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from '../../../Backend/Components/Loader';
 import { useGlobalContext } from '../../../Functions/Context';
-import { db } from '../../../Utils/Firebase';
+
 import Footer from '../../Components/Footer';
 import ReplyDetails from './ReplyDetails';
 
 
 const Outbox = () => {
 
-    const { setloader, loader, userId } = useGlobalContext()
+    const { loader, userId, complains, removeTags } = useGlobalContext()
 
-
-
-    const [complains, complainsF] = useState([]);
-
-    useEffect(() => {
-        setloader(true);
-        const unsub = onSnapshot(
-            collection(db, "complains"),
-
-            (snapshot) => {
-                let list = [];
-
-                snapshot.docs.forEach((doc) => {
-                    list.push({ id: doc.id, ...doc.data() });
-                });
-                complainsF(list);
-                setloader(false);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-
-        return () => {
-            unsub();
-        };
-    }, []);
 
 
     const { id } = useParams()
 
-
-
     useEffect(() => {
-
-
         id && DetailsPageF(true);
-
     }, [id]);
 
 
     const [DetailsPage, DetailsPageF] = useState(false)
 
 
+
+ 
 
 
 
@@ -79,7 +49,6 @@ const Outbox = () => {
 
                                 <>
 
-
                                     <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
 
 
@@ -95,27 +64,16 @@ const Outbox = () => {
                                                                     <div key={index} className="report" >
                                                                         <h5>{report.title}</h5>
 
-                                                                        <p>{`${report.description.substring(0, 100)}...`}</p>
-                                                                        {/* <Link to={`/detail/${report.id}`}> */}
+                                                                        <p>{`${removeTags(report.description.substring(0, 100))}...`}</p>
+
                                                                         <button onClick={() => {
                                                                             toast('Complain Sent')
                                                                         }} className='btn'>Resend</button>
-                                                                        {/* </Link> */}
+
 
                                                                     </div>
                                                                 );
                                                             }
-
-
-                                                            // else if (report.reply.replyTxt === '') {
-                                                            //   return (
-                                                            //     <div className='notificationBox' style={{ backgroundColor: 'rgb(246, 249, 252)', textAlign: 'center' }}>
-                                                            //       <img src='img/msg.png' alt='' />
-
-                                                            //       <p style={{ marginTop: -40 }}>Your Outbox is empty</p>
-                                                            //     </div>
-                                                            //   )
-                                                            // }
 
                                                         }
 
@@ -129,14 +87,6 @@ const Outbox = () => {
                                                         <p style={{ marginTop: -40 }}>Your Outbox is empty</p>
                                                     </div>
                                             }
-
-
-
-
-
-
-
-
                                         </div>
 
 
@@ -149,13 +99,6 @@ const Outbox = () => {
 
                 </>
             }
-
-
-
-
-
-
-
 
         </div >
     )

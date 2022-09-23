@@ -23,9 +23,6 @@ const Home = () => {
 
                     pageState === 'Inbox' ? <Inbox /> :
                         pageState === 'Outbox' ? <Outbox /> :
-
-
-
                             <Dashboard />}
 
             </div>

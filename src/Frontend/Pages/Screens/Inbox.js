@@ -1,10 +1,10 @@
-import { collection, onSnapshot } from 'firebase/firestore';
+
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../../../Backend/Components/Loader';
 
 import { useGlobalContext } from '../../../Functions/Context';
-import { db } from '../../../Utils/Firebase';
+
 import Footer from '../../Components/Footer';
 import ReplyDetails from './ReplyDetails';
 
@@ -12,46 +12,14 @@ import ReplyDetails from './ReplyDetails';
 
 const Inbox = () => {
 
-    const { setloader, loader, user } = useGlobalContext()
-
-    const userId = user?.uid
-
-    const [complains, complainsF] = useState([]);
-
-    useEffect(() => {
-        setloader(true);
-        const unsub = onSnapshot(
-            collection(db, "complains"),
-
-            (snapshot) => {
-                let list = [];
-
-                snapshot.docs.forEach((doc) => {
-                    list.push({ id: doc.id, ...doc.data() });
-                });
-                complainsF(list);
-                setloader(false);
-            },
-            (error) => {
-                console.log(error);
-            }
-        );
-
-        return () => {
-            unsub();
-        };
-    }, []);
-
+    const { loader, complains, userId } = useGlobalContext()
 
     const { id } = useParams()
 
 
 
     useEffect(() => {
-
-
         id && DetailsPageF(true);
-
     }, [id]);
 
 
@@ -60,12 +28,8 @@ const Inbox = () => {
 
 
 
-
-
-
     return (
         <div className='dashboard'>
-
 
             {loader ? <Loader /> :
 
@@ -83,8 +47,6 @@ const Inbox = () => {
                             DetailsPage ? <ReplyDetails /> :
 
                                 <>
-
-
                                     <div style={{ backgroundColor: 'transparent' }} className='notificationBox'>
 
 
@@ -122,15 +84,7 @@ const Inbox = () => {
                                                     </div>
                                             }
 
-
-
-
-
-
                                         </div>
-
-
-
                                     </div>
                                 </>
                         }
