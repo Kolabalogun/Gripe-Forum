@@ -27,8 +27,6 @@ const Navbar = () => {
       <div className='userNav'>
 
         {user ? <>  <div className='search'>
-
-
           <div className='bar'>
             <img src='svg/list.svg' alt='' />
           </div>

@@ -6,9 +6,11 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
+
+
 const firebaseConfig = {
 
-  apiKey: "AIzaSyBOj1baSXORuThDICnh01rNx8TPorxuHUs",
+  apiKey: 'AIzaSyBOj1baSXORuThDICnh01rNx8TPorxuHUs',
 
   authDomain: "gripe-forum.firebaseapp.com",
 
