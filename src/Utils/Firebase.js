@@ -10,16 +10,16 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
 
-  apiKey: process.env.local.REACT_APP_API_KEY,
+  apiKey: process.env.REACT_APP_API_KEY,
 
-  authDomain: process.env.local.REACT_APP_DOMAIN_NAME,
+  authDomain: process.env.REACT_APP_DOMAIN_NAME,
 
-  projectId: process.env.local.REACT_APP_PROJECT_ID,
+  projectId: process.env.REACT_APP_PROJECT_ID,
 
-  storageBucket: process.env.local.REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: process.env.local.REACT_APP_MESSAGING_SID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SID,
 
-  appId: process.env.local.REACT_APP_APP_ID
+  appId: process.env.REACT_APP_APP_ID
 
 };
 
