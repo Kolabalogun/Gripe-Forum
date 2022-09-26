@@ -6,19 +6,20 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
+
+
 const firebaseConfig = {
 
-  apiKey: "AIzaSyBOj1baSXORuThDICnh01rNx8TPorxuHUs",
+  apiKey: process.env.REACT_APP_API_KEY,
 
-  authDomain: "gripe-forum.firebaseapp.com",
+  authDomain: process.env.REACT_APP_DOMAIN_NAME,
 
-  projectId: "gripe-forum",
+  projectId: process.env.REACT_APP_PROJECT_ID,
 
-  storageBucket: "gripe-forum.appspot.com",
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SID,
 
-  messagingSenderId: "118106829404",
-
-  appId: "1:118106829404:web:031ec4e4a2ecc79a5fac99"
+  appId: process.env.REACT_APP_APP_ID
 
 };
 
